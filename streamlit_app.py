@@ -86,7 +86,7 @@ def save_uploaded_file(uploaded_file):
     return file_path
 
 
- @st.cache_resource(show_spinner=False)   
+@st.cache_resource(show_spinner=False)   
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
     global browser
 
