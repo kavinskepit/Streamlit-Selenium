@@ -110,7 +110,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
     browser.get("http://www.facebook.com")
     button = browser.find_element(By.CSS_SELECTOR, 'button[data-testid="royal_login_button"]')
     st.write(button.text)
-    if st.radio("Post to Facebook"):
+    if st.checkbox("Post to Facebook"):
         if selected_image_index:
             st.write("Posting images")
             if 1 <= int(selected_image_index) <= len(image_urls):
