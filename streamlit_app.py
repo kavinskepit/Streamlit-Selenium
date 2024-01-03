@@ -1000,7 +1000,7 @@ def show_selenium_log(logpath):
 browser=webdriver.Chrome(options=get_webdriver_options())
 
 def run_selenium(logpath):
-    browser=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
+    browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
         
     return browsers
