@@ -87,7 +87,7 @@ def save_uploaded_file(uploaded_file):
 
 @st.cache_resource(show_spinner=False)   
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
-    global browser
+    
 
     #facebook content generation
     st.subheader("Facebook Post Content Generation")
@@ -766,7 +766,7 @@ def post_to_facebook_demo_schedule(access_token, page_id, message, image_path, s
             
 @st.cache_resource(show_spinner=False)
 def login_to_facebook_existing_user(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
-    global browser
+    
 
     #facebook content generation
     st.subheader("Facebook Post Content Generation")
