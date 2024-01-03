@@ -105,9 +105,11 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
     selected_image_index = st.text_input("Enter the image you want to choose (e.g., 1)",key="selected image")
     #upload image
     uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
-
+    browser
     selected_profile = None  # Assign a default value
-
+    browser.get("http://www.facebook.com")
+    button = browser.find_element(By.CSS_SELECTOR, 'button[data-testid="royal_login_button"]')
+    st.write(button.text)
     if st.toggle("Post to Facebook"):
         if selected_image_index:
             st.write("Posting images")
