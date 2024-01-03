@@ -997,7 +997,7 @@ def show_selenium_log(logpath):
             st.code(body=content, language='log', line_numbers=True)
     else:
         st.warning('No log file found!')
-browser=webdriver.Chrome(options=get_webdriver_options())
+
 
 def run_selenium(logpath):
     browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
