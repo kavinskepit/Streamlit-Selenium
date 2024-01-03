@@ -110,100 +110,82 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
     browser.get("http://www.facebook.com")
     button = browser.find_element(By.CSS_SELECTOR, 'button[data-testid="royal_login_button"]')
     st.write(button.text)
-    
-    if selected_image_index:
-        st.write("Posting images")
-        if 1 <= int(selected_image_index) <= len(image_urls):
-            st.session_state.selected_image_index = int(selected_image_index) - 1
-            st.session_state.selected_image_url = image_urls[int(selected_image_index) - 1]
-            image_path= image_urls[int(selected_image_index) - 1]
-            st.text(f"Selected Image {selected_image_index}")  
-                
-                
-            facebook_username = st.text_input("Enter your Facebook username")
-            facebook_password = st.text_input("Enter your Facebook password", type="password")
-            if st.checkbox("Login to facebook"):
-                username=facebook_username
-                password=facebook_password
-                if facebook_username and facebook_password:
-                    st.info("Logging in to Facebook...")
-                    #login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)
-                    page_id,permanant_access_token = app_creation(username, password, App_name)
-                            #image_path = 'image.jpeg'
-                    access_token = permanant_access_token  # Your Facebook access token here
-                            #page_id = '179897971873271'  # Your Facebook page ID here
-                    message = str(modified_content)
-
-                    if st.checkbox("Schedule Post" ):
-                        image_url = image_path
-                        image_response = requests.get(image_url)
-                       # graph = facebook.GraphAPI(access_token)
-                        print(page_id)
-                        # Check if the request was successful (status code 200)
-                        #if image_response.status_code == 200:
-                        # Open the image file in binary mode
-                        #    with open('local_image.png', 'wb') as file:
-                        #        # Write the content of the response to the file
-                        #        file.write(image_response.content)
-                        #image_path = 'local_image.png'
-                        image_path = image_response.content
-                            
-                        caption = modified_content
-                        
-                            
-                            
-
-                        # Replace with your User Access Token, Page ID, and desired API version
-                        user_access_token = permanant_access_token
-                            
-
-                        api_version = "v13.0"
-                        # Make a request to get the Page Access Token
-                        url = f"https://graph.facebook.com/{api_version}/{page_id}?fields=access_token&access_token={user_access_token}"
-                        response = requests.get(url)
-                        data = response.json()
-
-                        # Extract the Page Access Token
-                        page_access_token = data.get("access_token")
-                        print(f"Page Access Token: {page_access_token}")
-                        st.header("Scheduling posts on Facebook")
-                        message = modified_content
-                        scheduled_date = st.date_input("Select date:")
-                        scheduled_time = st.time_input("Select time:")
-
-                        # Combine date and time to create a datetime object
-                        scheduled_datetime = datetime.combine(scheduled_date, scheduled_time)
-
-                        # Step 8: Display all timezones in a dropdown
-                        timezones = pytz.all_timezones
-                        selected_timezone = st.selectbox("Select timezone:", timezones)
-
-                        # Step 9: Store the selected timezone
-                        st.write(f"Selected Timezone: {selected_timezone}")
-
-                        # Step 9 & 10: Post the Facebook post according to the date, time, and timezone
-                        if st.button("Schedule Post"):
-                            if  message and scheduled_datetime:
-                                try:
-                                    # Save the uploaded file and get the file path
-                                    #image_path = save_uploaded_file(uploaded_file)
-                                    post_to_facebook_demo_schedule_image_url(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
-                                    st.success("Post scheduled successfully!")
-                                except Exception as e:
-                                    st.error(f"Error scheduling post: {e}")
-                            else:
-                                st.warning("Please fill in all the required fields.")                                
-                    if st.checkbox("Post Now"):
-                        post_to_facebook_demo(access_token, page_id, message, image_path)
-                        st.success("Post published successfully.")
-                        # Button to close the browser
-                        if st.button("Close Browser"):
-                            close_browser()
-                else:
-                    st.warning("Please enter both Facebook username and password.")
-        else:
-            st.warning(f"Invalid image index. Please enter a number between 1 and {len(image_urls)}.")
-                            
+    st.write("Posting images")
+    if 1 <= int(selected_image_index) <= len(image_urls):
+        st.session_state.selected_image_index = int(selected_image_index) - 1
+        st.session_state.selected_image_url = image_urls[int(selected_image_index) - 1]
+        image_path= image_urls[int(selected_image_index) - 1]
+        st.text(f"Selected Image {selected_image_index}")  
+        facebook_username = st.text_input("Enter your Facebook username")
+        facebook_password = st.text_input("Enter your Facebook password", type="password")
+        if st.checkbox("Login to facebook"):
+            username=facebook_username
+            password=facebook_password
+            if facebook_username and facebook_password:
+                st.info("Logging in to Facebook...")
+                #login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)
+                page_id,permanant_access_token = app_creation(username, password, App_name)
+                        #image_path = 'image.jpeg'
+                access_token = permanant_access_token  # Your Facebook access token here
+                        #page_id = '179897971873271'  # Your Facebook page ID here
+                message = str(modified_content)
+                if st.checkbox("Schedule Post" ):
+                    image_url = image_path
+                    image_response = requests.get(image_url)
+                   # graph = facebook.GraphAPI(access_token)
+                    print(page_id)
+                    # Check if the request was successful (status code 200)
+                    #if image_response.status_code == 200:
+                    # Open the image file in binary mode
+                    #    with open('local_image.png', 'wb') as file:
+                    #        # Write the content of the response to the file
+                    #        file.write(image_response.content)
+                    #image_path = 'local_image.png'
+                    image_path = image_response.content
+                    caption = modified_content
+                    # Replace with your User Access Token, Page ID, and desired API version
+                    user_access_token = permanant_access_token
+                    api_version = "v13.0"
+                    # Make a request to get the Page Access Token
+                    url = f"https://graph.facebook.com/{api_version}/{page_id}?fields=access_token&access_token={user_access_token}"
+                    response = requests.get(url)
+                    data = response.json()
+                    # Extract the Page Access Token
+                    page_access_token = data.get("access_token")
+                    print(f"Page Access Token: {page_access_token}")
+                    st.header("Scheduling posts on Facebook")
+                    message = modified_content
+                    scheduled_date = st.date_input("Select date:")
+                    scheduled_time = st.time_input("Select time:")
+                    # Combine date and time to create a datetime object
+                    scheduled_datetime = datetime.combine(scheduled_date, scheduled_time)
+                    # Step 8: Display all timezones in a dropdown
+                    timezones = pytz.all_timezones
+                    selected_timezone = st.selectbox("Select timezone:", timezones)
+                    # Step 9: Store the selected timezone
+                    st.write(f"Selected Timezone: {selected_timezone}")
+                    # Step 9 & 10: Post the Facebook post according to the date, time, and timezone
+                    if st.button("Schedule Post"):
+                        if  message and scheduled_datetime:
+                            try:
+                                # Save the uploaded file and get the file path
+                                #image_path = save_uploaded_file(uploaded_file)
+                                post_to_facebook_demo_schedule_image_url(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
+                                st.success("Post scheduled successfully!")
+                            except Exception as e:
+                                st.error(f"Error scheduling post: {e}")
+                        else:
+                            st.warning("Please fill in all the required fields.")                                
+                if st.checkbox("Post Now"):
+                    post_to_facebook_demo(access_token, page_id, message, image_path)
+                    st.success("Post published successfully.")
+                    # Button to close the browser
+                    if st.button("Close Browser"):
+                        close_browser()
+            else:
+                st.warning("Please enter both Facebook username and password.")
+    else:
+        st.warning(f"Invalid image index. Please enter a number between 1 and {len(image_urls)}.")
     return browser, selected_profile
 
 @st.cache_resource(show_spinner=False)
