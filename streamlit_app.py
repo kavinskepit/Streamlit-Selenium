@@ -29,7 +29,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
 
 @st.cache_resource(show_spinner=False)
 def validate_user_credentials(username, password):
@@ -1003,8 +1003,8 @@ def run_selenium(logpath):
     browser=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
         
-    return browser
-
+    return browsers
+browser=run_selenium(logpath=logpath)
 
 if __name__ == "__main__":
     logpath=get_logpath()
