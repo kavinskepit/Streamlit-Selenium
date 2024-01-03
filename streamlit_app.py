@@ -60,7 +60,7 @@ def run_selenium(logpath):
         url = "https://www.facebook.com/?sk=welcome"
         driver.get(url)
         
-    return driver
+    return driver.page_source
 
 
 if __name__ == "__main__":
