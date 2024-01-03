@@ -68,23 +68,69 @@ def run_selenium(logpath):
 if __name__ == "__main__":
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
-    st.set_page_config(page_title="Selenium Test", page_icon='✅',
+    st.set_page_config(page_title="FB Automate", page_icon='✅',
         initial_sidebar_state='collapsed')
-    st.title('🔨 Selenium on Streamlit Cloud')
-    st.markdown('''This app is only a very simple test for **Selenium** running on **Streamlit Cloud** runtime.<br>
-        The suggestion for this demo app came from a post on the Streamlit Community Forum.<br>
-        <https://discuss.streamlit.io/t/issue-with-selenium-on-a-streamlit-app/11563><br><br>
-        This is just a very very simple example and more a proof of concept.<br>
-        A link is called and waited for the existence of a specific class to read a specific property.
-        If there is no error message, the action was successful.
-        Afterwards the log file of chromium is read and displayed.
-        ''', unsafe_allow_html=True)
+    st.title('Facebook Posts Automation')
     st.markdown('---')
 
     st.balloons()
-    if st.button('Start Selenium run'):
-        st.warning('Selenium is running, please wait...')
-        result = run_selenium(logpath=logpath)
-        st.info(f'Result -> {result}')
-        st.info('Successful finished. Selenium log file is shown below...')
-        show_selenium_log(logpath=logpath)
+    login_option = st.sidebar.selectbox("Choose login option:", ("Select", "Admin login", "User login"))
+
+    if login_option == "Select":
+        st.warning("Please select a login option.")
+
+    elif login_option == "Admin login":
+        st.warning("Admin login feature is not implemented yet.")
+        # You can add admin login functionality here if needed.
+
+    elif login_option == "User login":
+        # User credentials step
+        if st.checkbox('Existing user'):
+            st.subheader("User Credentials")
+            user_username = st.text_input("Enter your username")
+            user_password = st.text_input("Enter your password", type="password")
+
+            if st.checkbox("Validate User Credentials"):
+                if validate_user_credentials(user_username, user_password):
+                    st.success("User credentials validated successfully!")
+
+                    # Facebook login and profile selection step
+                    st.subheader("Facebook Login and Profile Selection")
+                    #facebook_username = st.text_input("Enter your Facebook username")
+                    #facebook_password = st.text_input("Enter your Facebook password", type="password")
+                    App_name = st.text_input("Enter your Facebook App Name")
+                    #restuarant_name=st.text_input("Enter Your Resturant name")
+                    nature_of_cuisine=st.text_input("Enter Nature of Cuisine")
+                    occasion=st.text_input("Enter the occasion")
+                    offer=st.text_input("Enter the offer or the discount")
+                    other_keywords=st.text_input("Enter keywords to describe the image / poster you want to post")
+                    location=st.text_input("Enter your location")
+                    if st.checkbox("Run"):
+                        login_to_facebook_existing_user(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)
+                else:
+                    st.error("Invalid user credentials. Please try again.")
+        if st.checkbox('New user'):
+            st.subheader("User Credentials")
+            user_username = st.text_input("Enter your username")
+            user_password = st.text_input("Enter your password", type="password")
+
+            if st.checkbox("Validate User Credentials"):
+                if validate_user_credentials(user_username, user_password):
+                    st.success("User credentials validated successfully!")
+
+                    # Facebook login and profile selection step
+                    st.subheader("Facebook Login and Profile Selection")
+                    #facebook_username = st.text_input("Enter your Facebook username")
+                    #facebook_password = st.text_input("Enter your Facebook password", type="password")
+                    App_name = st.text_input("Enter your Facebook App Name")
+                    restuarant_name=st.text_input("Enter Your Resturant name")
+                    nature_of_cuisine=st.text_input("Enter Nature of Cuisine")
+                    occasion=st.text_input("Enter the occasion")
+                    offer=st.text_input("Enter the offer or the discount")
+                    other_keywords=st.text_input("Enter keywords to describe the image / poster you want to post")
+                    location=st.text_input("Enter your location")
+                    if st.checkbox("Run"):
+                        login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)      
+                else:
+                    st.error("Invalid user credentials. Please try again.")
+
