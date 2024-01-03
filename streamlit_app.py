@@ -10,6 +10,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 @st.cache_resource(show_spinner=False)
+def validate_user_credentials(username, password):
+    # Replace this with your validation logic
+    return username == "Skepitglobal" and password == "Skepitglobal"
+
+@st.cache_resource(show_spinner=False)
 def get_logpath():
     return os.path.join(os.getcwd(), 'selenium.log')
 
