@@ -999,14 +999,11 @@ def show_selenium_log(logpath):
         st.warning('No log file found!')
 browser=webdriver.Chrome(options=get_webdriver_options())
 
-'''def run_selenium(logpath):
-    with webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath)) as driver:
-        url = "https://www.facebook.com/"
-        driver.get(url)
-        button = driver.find_element(By.CSS_SELECTOR, 'button[data-testid="royal_login_button"]')
-        name=button.text
+def run_selenium(logpath):
+    browser=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
-    return name'''
+        
+    return browser
 
 
 if __name__ == "__main__":
