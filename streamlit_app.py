@@ -1004,11 +1004,12 @@ def run_selenium(logpath):
         
         
     return browsers
-browser=run_selenium(logpath=logpath)
+
 
 if __name__ == "__main__":
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
+    browser=run_selenium(logpath=logpath)
     st.set_page_config(page_title="FB Automate", page_icon='✅',
         initial_sidebar_state='collapsed')
     st.title('Facebook Posts Automation')
