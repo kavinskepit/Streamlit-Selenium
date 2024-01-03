@@ -30,7 +30,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
-browser=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
+
 @st.cache_resource(show_spinner=False)
 def validate_user_credentials(username, password):
     # Replace this with your validation logic
@@ -997,7 +997,7 @@ def show_selenium_log(logpath):
             st.code(body=content, language='log', line_numbers=True)
     else:
         st.warning('No log file found!')
-
+browser=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
 
 '''def run_selenium(logpath):
     with webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath)) as driver:
