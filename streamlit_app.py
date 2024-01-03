@@ -31,7 +31,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 browser=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
-global browser
 @st.cache_resource(show_spinner=False)
 def validate_user_credentials(username, password):
     # Replace this with your validation logic
