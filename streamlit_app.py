@@ -552,7 +552,7 @@ def app_creation(username, password, App_name):
             item_xpath = f'//div[contains(., "{App_name}")]/span[@class="_5xzx"]'
             time.sleep(14)
 
-            item_element = WebDriverWait(browsers, 10).until(
+            item_element = WebDriverWait(browsers, 60).until(
             EC.element_to_be_clickable((By.XPATH, item_xpath))
             )
             time.sleep(2)
