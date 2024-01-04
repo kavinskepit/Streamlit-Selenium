@@ -1094,4 +1094,9 @@ if __name__ == "__main__":
                         login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)      
                 else:
                     st.error("Invalid user credentials. Please try again.")
+                        
+        if st.button("Close Application"):
+        st.cache.clear()
+        st.experimental_rerun()
+        
 
