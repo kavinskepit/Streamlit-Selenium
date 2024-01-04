@@ -386,7 +386,7 @@ def app_creation(username, password, App_name):
     username_elem.send_keys(username)
     password_elem.send_keys(password)
     button.click()
-    time.sleep(10)  # Waiting for the page to load
+    time.sleep(14)  # Waiting for the page to load
 # facebook login
     outer_profile_element = WebDriverWait(browsers, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, ".x14yjl9h.xudhj91.x18nykt9.xww2gxu.x10l6tqk.xhtitgo"))
