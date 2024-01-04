@@ -84,14 +84,13 @@ def run_selenium(logpath):
         
     return browsers
 
-@st.cache
+@st.cache_resource(show_spinner=False)
 def validate_user_credentials(username, password):
     # Replace this with your validation logic
     return username == "Skepitglobal" and password == "Skepitglobal"
 
 
 #function that generates text content for facebook post using Chat GPT
-@st.cache
 def content_generator(restuarant_name, location, nature_of_cuisine, occasion, offer):
     prompt = f"You are a prompt engineering assistant. Create a Facebook post for resturant {restuarant_name} at location {location} and my nature of cuisine is {nature_of_cuisine} for the {occasion} occasion and we are giving flat {offer} discount  and add relevant tags. Generate content without user involvement and limit to 50 words"
     #Generate content for the Facebook post using GPT-3.5 Turbo
@@ -111,7 +110,7 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 
 #function that generates images using monster API    
-@st.cache
+@st.cache_resource(show_spinner=False)
 def image_generator(other_keywords):
     api_key = MONKEY  # Your API key here
     monster_client = client(api_key)
@@ -132,7 +131,7 @@ def image_generator(other_keywords):
     return image_urls
 
 
-@st.cache
+@st.cache_resource(show_spinner=False)
 def save_uploaded_file(uploaded_file):
     temp_dir = tempfile.gettempdir()
     file_path = os.path.join(temp_dir, uploaded_file.name)
@@ -142,7 +141,7 @@ def save_uploaded_file(uploaded_file):
 
 
 #function that displays content and defines the UI (Main)
-@st.cache   
+@st.cache_resource(show_spinner=False)
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
     global browsers
 
@@ -361,7 +360,6 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
 
 
 #function for app automation
-@st.cache
 def app_creation(username, password, App_name):
     #facebook login
     selected_profile = None  # Assign a default value
@@ -773,7 +771,7 @@ def app_creation(username, password, App_name):
         
         
 #function for post a scheduled post containing user uploaded image 
-@st.cache_data       
+@st.cache_resource(show_spinner=False)
 def post_to_facebook_demo_schedule_file_upload(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone):
     graph = facebook.GraphAPI(access_token)
 
@@ -789,7 +787,7 @@ def post_to_facebook_demo_schedule_file_upload(access_token, page_id, message, i
     
 
 #function to post scheduled post of a generated image                                    
-@st.cache_data
+@st.cache_resource(show_spinner=False)
 def post_to_facebook_demo_schedule_image_url(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone):
     graph = facebook.GraphAPI(access_token)
 
@@ -809,8 +807,7 @@ def post_to_facebook_demo_schedule_image_url(access_token, page_id, message, ima
     
     
     
-@st.cache_data
-#
+@st.cache_resource(show_spinner=False)
 def post_to_facebook_demo_schedule(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone):
     graph = facebook.GraphAPI(access_token)
 
@@ -827,7 +824,7 @@ def post_to_facebook_demo_schedule(access_token, page_id, message, image_path, s
 
 
 #function for existing user    
-@st.cache_data
+@st.cache_resource(show_spinner=False)
 def login_to_facebook_existing_user(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
     global browsers
 
