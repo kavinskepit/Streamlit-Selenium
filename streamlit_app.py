@@ -126,8 +126,8 @@ def image_generator(other_keywords):
         }
     result = monster_client.generate(model, input_data)
 
-    #image_urls = result['output']
-    image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
+    image_urls = result['output']
+    #image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
     return image_urls
 
 
