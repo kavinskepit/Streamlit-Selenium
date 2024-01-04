@@ -35,17 +35,14 @@ OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 MON_KEY = st.secrets['MON_KEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
         
-@st.cache_resource(show_spinner=False)
 def get_logpath():
     return os.path.join(os.getcwd(), 'selenium.log')
 
 
-@st.cache_resource(show_spinner=False)
 def get_chromedriver_path():
     return shutil.which('chromedriver')
 
 
-@st.cache_resource(show_spinner=False)
 def get_webdriver_options():
     options = Options()
     options.add_argument("--headless")
@@ -65,12 +62,10 @@ def get_webdriver_service(logpath):
     )
     return service
 
-@st.cache_resource(show_spinner=False)
 def delete_selenium_log(logpath):
     if os.path.exists(logpath):
         os.remove(logpath)
 
-@st.cache_resource(show_spinner=False)
 def show_selenium_log(logpath):
     if os.path.exists(logpath):
         with open(logpath) as f:
