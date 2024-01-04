@@ -84,14 +84,14 @@ def run_selenium(logpath):
         
     return browsers
 
-@st.cache_data
+@st.cache
 def validate_user_credentials(username, password):
     # Replace this with your validation logic
     return username == "Skepitglobal" and password == "Skepitglobal"
 
 
 #function that generates text content for facebook post using Chat GPT
-@st.cache_data
+@st.cache
 def content_generator(restuarant_name, location, nature_of_cuisine, occasion, offer):
     prompt = f"You are a prompt engineering assistant. Create a Facebook post for resturant {restuarant_name} at location {location} and my nature of cuisine is {nature_of_cuisine} for the {occasion} occasion and we are giving flat {offer} discount  and add relevant tags. Generate content without user involvement and limit to 50 words"
     #Generate content for the Facebook post using GPT-3.5 Turbo
@@ -111,7 +111,7 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 
 #function that generates images using monster API    
-@st.cache_data
+@st.cache
 def image_generator(other_keywords):
     api_key = MONKEY  # Your API key here
     monster_client = client(api_key)
@@ -132,7 +132,7 @@ def image_generator(other_keywords):
     return image_urls
 
 
-@st.cache_data
+@st.cache
 def save_uploaded_file(uploaded_file):
     temp_dir = tempfile.gettempdir()
     file_path = os.path.join(temp_dir, uploaded_file.name)
@@ -142,9 +142,9 @@ def save_uploaded_file(uploaded_file):
 
 
 #function that displays content and defines the UI (Main)
-@st.cache_data(experimental_allow_widgets=True)    
+@st.cache   
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
-    global browser
+    global browsers
 
     #facebook content generation
     st.subheader("Facebook Post Content Generation")
@@ -248,9 +248,9 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                         if st.checkbox("Post Now"):
                             post_to_facebook_demo(access_token, page_id, message, image_path)
                             st.success("Post published successfully.")
-                        # Button to close the browser
-                            if st.button("Close Browser"):
-                                close_browser()
+                        # Button to close the browsers
+                            if st.button("Close browsers"):
+                                close_browsers()
                     else:
                         st.warning("Please enter both Facebook username and password.")
             else:
@@ -346,13 +346,13 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                     if st.checkbox("Post Now"):
                         post_to_facebook_demo_file_upload(access_token, page_id, message, image_path)
                         st.success("Post published successfully.")
-                    # Button to close the browser
-                        if st.button("Close Browser"):
-                            close_browser()
+                    # Button to close the browsers
+                        if st.button("Close browsers"):
+                            close_browsers()
                 else:
                     st.warning("Please enter both Facebook username and password.")
                     
-    return browser, selected_profile
+    return browsers, selected_profile
 
 
 
@@ -361,7 +361,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
 
 
 #function for app automation
-@st.cache_data(experimental_allow_widgets=True)
+@st.cache
 def app_creation(username, password, App_name):
     #facebook login
     selected_profile = None  # Assign a default value
@@ -370,30 +370,30 @@ def app_creation(username, password, App_name):
     #chrome_options.add_argument("--disable-notifications")
 
     #service = Service(chrome_driver_path)
-    #browser = webdriver.Chrome(service=service, options=chrome_options)
+    #browsers = webdriver.Chrome(service=service, options=chrome_options)
     #facebook login
-    browser.get("http://www.facebook.com")
+    browsers.get("http://www.facebook.com")
 
-    username_elem = browser.find_element(By.ID, "email")
-    password_elem = browser.find_element(By.ID, "pass")
-    button = browser.find_element(By.CSS_SELECTOR, 'button[data-testid="royal_login_button"]')
-    browser.maximize_window()
+    username_elem = browsers.find_element(By.ID, "email")
+    password_elem = browsers.find_element(By.ID, "pass")
+    button = browsers.find_element(By.CSS_SELECTOR, 'button[data-testid="royal_login_button"]')
+    browsers.maximize_window()
     username_elem.send_keys(username)
     password_elem.send_keys(password)
     button.click()
     time.sleep(4)  # Waiting for the page to load
 # facebook login
-    outer_profile_element = WebDriverWait(browser, 10).until(
+    outer_profile_element = WebDriverWait(browsers, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, ".x14yjl9h.xudhj91.x18nykt9.xww2gxu.x10l6tqk.xhtitgo"))
     )
     outer_profile_element.click()
     time.sleep(4)
-    inner_profile_element = WebDriverWait(browser, 10).until(
+    inner_profile_element = WebDriverWait(browsers, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, '.x1i10hfl.xjbqb8w.x6umtig.x1b1mbwd.xaqea5y.xav7gou.x1ypdohk.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x16tdsg8.x1hl2dhg.xggy1nq.x1o1ewxj.x3x9cwd.x1e5q0jg.x13rtm0m.x87ps6o.x1lku1pv.x1a2a7pz.x9f619.x3nfvp2.xdt5ytf.xl56j7k.x1n2onr6.xh8yej3'))
     )
     inner_profile_element.click()
     time.sleep(4)
-    profile_containers = WebDriverWait(browser, 10).until(
+    profile_containers = WebDriverWait(browsers, 10).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.x1i10hfl.x1qjc9v5.xjbqb8w.xjqpnuy.xa49m3k.xqeqjp1.x2hbi6w.x13fuv20.xu3j5b3.x1q0q8m5.x26u7qi.x972fbf.xcfux6l.x1qhh985.xm0m39n.x9f619.x1ypdohk.xdl72j9.x2lah0s.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x2lwn1j.xeuugli.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1n2onr6.x16tdsg8.x1hl2dhg.xggy1nq.x1ja2u2z.x1t137rt.x1q0g3np.x87ps6o.x1lku1pv.x1a2a7pz.x1lq5wgf.xgqcy7u.x30kzoy.x9jhf4c.x1lliihq[role="radio"]'))
     )
     st.write("Profiles and Business pages")
@@ -409,132 +409,132 @@ def app_creation(username, password, App_name):
             time.sleep(3)
             time.sleep(4)
             business_page_name = selected_profile
-            business_page_element = WebDriverWait(browser, 10).until(
+            business_page_element = WebDriverWait(browsers, 10).until(
                 EC.element_to_be_clickable((By.XPATH, f'//span[text()="{business_page_name}"]'))
             )
             business_page_element.click()
             time.sleep(4)
         
         
-            about_element = WebDriverWait(browser, 10).until(
+            about_element = WebDriverWait(browsers, 10).until(
                     EC.element_to_be_clickable((By.XPATH, '//span[text()="About"]'))
                 )
             about_element.click()
-            page_transparency_element = WebDriverWait(browser, 10).until(
+            page_transparency_element = WebDriverWait(browsers, 10).until(
                 EC.element_to_be_clickable((By.XPATH, '//span[text()="Page transparency"]'))
             )
             page_transparency_element.click()
             time.sleep(8)
             xpath = '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div/div/div[4]/div/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[1]/span'
-            page_id_element = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            page_id_element = WebDriverWait(browsers, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
             page_id = page_id_element.text
             print("Page ID:", page_id)
             time.sleep(4)
             st.write(f"Retrieved Page ID: {page_id}")
             st.success(f"Clicked on {selected_profile}")
             time.sleep(4)
-            browser.get("https://business.facebook.com/login/?next=https%3A%2F%2Fdevelopers.facebook.com%2F%3Fbiz_login_source%3Dbizweb_unified_login_fb_login_button")
-            browser.maximize_window() 
-            element_to_click = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div[2]/div/div[2]/ul/li[5]/a/div[1]")
+            browsers.get("https://business.facebook.com/login/?next=https%3A%2F%2Fdevelopers.facebook.com%2F%3Fbiz_login_source%3Dbizweb_unified_login_fb_login_button")
+            browsers.maximize_window() 
+            element_to_click = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div[2]/div/div[2]/ul/li[5]/a/div[1]")
 
      
             element_to_click.click()
             #time.sleep(4)
-            create_newapp = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div/div[1]/div[3]/div[2]/div/div")
+            create_newapp = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div/div[1]/div[3]/div[2]/div/div")
      
         # Click the element
             create_newapp.click()
             #time.sleep(4)
-            usecase_button = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div[2]/div[2]/div[4]/div/div/div/div/div")
+            usecase_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div[2]/div[2]/div[4]/div/div/div/div/div")
               # Click the element
             usecase_button.click()
             #time.sleep(4)
      
      
             #click next button
-            next_button = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div[2]/div/div/div")
+            next_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div[2]/div/div/div")
             next_button.click()
             #time.sleep(4)
      
             #select app type
-            apptype_button = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div[1]/div")
+            apptype_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div[1]/div")
             apptype_button.click()
             #time.sleep(4)
      
             #close notification
-            notification_button = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[3]/div/div/div/div/form/div/div/button")
+            notification_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[3]/div/div/div/div/form/div/div/button")
             notification_button.click()
             time.sleep(4)
      
             #next button
-            next_button = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[3]/div/div")
+            next_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[3]/div/div")
             next_button.click()
             time.sleep(4)
      
             #type app name
-            appname=browser.find_element("xpath", "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div/div/div[1]/div[2]/div[1]/div/input")
+            appname=browsers.find_element("xpath", "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div/div/div[1]/div[2]/div[1]/div/input")
             appname.send_keys(App_name)
      
             #create app button
-            create_app_button = browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[4]/div[2]/div[2]/div")
+            create_app_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[4]/div[2]/div[2]/div")
             create_app_button.click()
             time.sleep(10)
     
-            #app_event = browser.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=analytics"]')
+            #app_event = browsers.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=analytics"]')
             #app_event.click()
             #time.sleep(6)
      
      
-            #link_element = browser.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
+            #link_element = browsers.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
      
             # Click the link
             #link_element.click()
             #time.sleep(4)
      
             #instagram
-            #instagram_graph_api_button =  browser.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=instagram"]')
+            #instagram_graph_api_button =  browsers.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=instagram"]')
      
             #instagram_graph_api_button.click()
             #time.sleep(3)
             #back to product page
-            #link_element = browser.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
+            #link_element = browsers.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
 
 
             #link_element.click()
 
             #whatsapp button
-            #button_whatsapp = browser.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=whatsapp-business"]')
+            #button_whatsapp = browsers.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=whatsapp-business"]')
             #button_whatsapp.click()
             #time.sleep(4)
 
             #back to product page
-            #link_element = browser.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
+            #link_element = browsers.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
 
             #link_element.click()
             #time.sleep(4)
             #business login
-            #button_business_login = browser.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=business-login"]')
+            #button_business_login = browsers.find_element(By.CSS_SELECTOR, 'a._271k._271m._1qjd._1gwm[href*="/async/products/add/?product_route=business-login"]')
             #button_business_login.click()
             #time.sleep(4)
 
             #back to product page
-            #link_element = browser.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
+            #link_element = browsers.find_element(By.CSS_SELECTOR, 'a.x1i10hfl')
             #link_element.click()
 
             #tools
-            tools_button= browser.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div/div[1]/div/div/div/div/div/div[2]/a[2]")
+            tools_button= browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div/div[1]/div/div/div/div/div/div[2]/a[2]")
             tools_button.click()
             time.sleep(4)
 
             #graph api explorer
-            graph_api_button = browser.find_element(By.XPATH, '/html/body/div[1]/div[5]/div[2]/div/div/div[2]/div[1]/div[1]')
+            graph_api_button = browsers.find_element(By.XPATH, '/html/body/div[1]/div[5]/div[2]/div/div/div[2]/div[1]/div[1]')
             graph_api_button.click()
 
  
 
             # Wait for the menu to be present
             button_xpath = '//*[@id="facebook"]/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[5]/div/button'
-            button_element = WebDriverWait(browser, 10).until(
+            button_element = WebDriverWait(browsers, 10).until(
             EC.element_to_be_clickable((By.XPATH, button_xpath))
             )   
             button_element.click()
@@ -545,7 +545,7 @@ def app_creation(username, password, App_name):
             item_xpath = f'//div[contains(., "{App_name}")]/span[@class="_5xzx"]'
             time.sleep(4)
 
-            item_element = WebDriverWait(browser, 10).until(
+            item_element = WebDriverWait(browsers, 10).until(
             EC.element_to_be_clickable((By.XPATH, item_xpath))
             )
             time.sleep(2)
@@ -555,7 +555,7 @@ def app_creation(username, password, App_name):
 
 
             #permissions button
-            permissions = browser.find_element(By.XPATH, '/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[9]/div[4]')
+            permissions = browsers.find_element(By.XPATH, '/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[9]/div[4]')
             permissions.click()
 
 
@@ -563,7 +563,7 @@ def app_creation(username, password, App_name):
  
  
             # Wait for the menu items to be present
-            menu_items = WebDriverWait(browser, 10).until(
+            menu_items = WebDriverWait(browsers, 10).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.uiContextualLayer ul[role="menu"] li a[role="menuitem"]')))
             time.sleep(6)
 
@@ -572,7 +572,7 @@ def app_creation(username, password, App_name):
                 item.click()
             time.sleep(6)
 
-            elements = WebDriverWait(browser, 10).until(
+            elements = WebDriverWait(browsers, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "_2wpb._3v8w"))
             )
 
@@ -584,17 +584,17 @@ def app_creation(username, password, App_name):
 
             time.sleep(4)
             #scroll up teh window
-            element = browser.find_element(By.XPATH,'/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]')
+            element = browsers.find_element(By.XPATH,'/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]')
             # Scroll the element into view
-            browser.execute_script("window.scrollTo(0, -document.body.scrollHeight);")
+            browsers.execute_script("window.scrollTo(0, -document.body.scrollHeight);")
 
 
-            original_window_handle = browser.current_window_handle
+            original_window_handle = browsers.current_window_handle
 
 
 
             #clicking the generate button
-            generate_token_button = WebDriverWait(browser, 10).until(
+            generate_token_button = WebDriverWait(browsers, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="facebook"]/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[2]/div/button'))
             )
 
@@ -604,94 +604,94 @@ def app_creation(username, password, App_name):
             #storing the state of teh original window
 
 
-            #window_after = browser.window_handles[1]
-            #browser.switch_to.window(window_after)
+            #window_after = browsers.window_handles[1]
+            #browsers.switch_to.window(window_after)
 
 
-            new_window_handle = WebDriverWait(browser, 10).until(EC.number_of_windows_to_be(2))
+            new_window_handle = WebDriverWait(browsers, 10).until(EC.number_of_windows_to_be(2))
 
             # Switch to the new window
-            all_window_handles = browser.window_handles
-            new_window_handle = [handle for handle in all_window_handles if handle != browser.current_window_handle][0]
-            browser.switch_to.window(new_window_handle)
+            all_window_handles = browsers.window_handles
+            new_window_handle = [handle for handle in all_window_handles if handle != browsers.current_window_handle][0]
+            browsers.switch_to.window(new_window_handle)
 
-            button0 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[2]/div[1]/form/div/div[3]/div/div[1]")))
+            button0 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[2]/div[1]/form/div/div[3]/div/div[1]")))
             button0.click()
             time.sleep(10)
          
-            button1 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div[2]")))
+            button1 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div[2]")))
             button1.click()   
             time.sleep(10)
 
             try:
-                button2 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
+                button2 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
                 button2.click()
                 time.sleep(10)
             except:
-                button2 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
+                button2 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
                 button2.click()
                 time.sleep(10)
                 
 
-            button3 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+            button3 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
             button3.click()
             time.sleep(10)
 
-            button4 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
+            button4 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
             button4.click()
             time.sleep(10)
 
-            button5 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "//html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+            button5 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "//html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
             button5.click()
             time.sleep(10)
 
-            button6 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
+            button6 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
             button6.click()
             time.sleep(10)
 
             try:
-                button7 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
+                button7 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
                 button7.click()
                 time.sleep(10)
             except:
-                button7 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
+                button7 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
                 button7.click()
                 time.sleep(10)
 
             try:
-                button8 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+                button8 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
                 button8.click()
                 time.sleep(10)
             except:
-                button8 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+                button8 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
                 button8.click()
                 time.sleep(10)
                 
          
             try:
-                button9 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+                button9 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
                 button9.click()
                 time.sleep(10)
             except:
-                button9 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
+                button9 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
                 button9.click()
                 time.sleep(10)
                 
          
             try:
-                button10 = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
+                button10 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
                 button10.click()
                 time.sleep(10)
             except:
-                browser.switch_to.window(original_window_handle)
+                browsers.switch_to.window(original_window_handle)
                 print("original window")
                 
 
-            browser.switch_to.window(original_window_handle)
+            browsers.switch_to.window(original_window_handle)
             print("original window")
 
 
-            access_token = browser.find_element(By.XPATH,"/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[2]/div/div/div[1]/label/input")
+            access_token = browsers.find_element(By.XPATH,"/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[2]/div/div/div[1]/label/input")
             #access token
             value = access_token.get_attribute("value")
             #value="EAAKfwS1Vv6cBOwLlyyhgbTcsoXO2fPdqAEXUQ9O6UgPWRj1bkoZCkNy8wGCPsZADyX6fPQOZAb8gR1T9G8zIPyz9fsNJrGughQtSd4IZBg9L1WbI0ZBAv8ZB15aWnZBvu3tU6B1heTYUuf1R9w52DuL43mozw4HsMb9NaR3ruiP9nGcZCEaqx3k883NjtiAeCt55kCOQLtfuIMSf9gLh434Ru2SGuSJndqUKd2MZD"
@@ -829,7 +829,7 @@ def post_to_facebook_demo_schedule(access_token, page_id, message, image_path, s
 #function for existing user    
 @st.cache_data
 def login_to_facebook_existing_user(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
-    global browser
+    global browsers
 
     #facebook content generation
     st.subheader("Facebook Post Content Generation")
@@ -943,9 +943,9 @@ def login_to_facebook_existing_user(App_name,restuarant_name,location,nature_of_
                         if st.checkbox("Post Now"):
                             post_to_facebook_demo(access_token, page_id, message, image_path)
                             st.success("Post published successfully.")
-                        # Button to close the browser
-                            if st.button("Close Browser"):
-                                close_browser()
+                        # Button to close the browsers
+                            if st.button("Close browsers"):
+                                close_browsers()
                     else:
                         st.warning("Please enter both Facebook username and password.")
             else:
@@ -1011,11 +1011,11 @@ def run_schedule():
         schedule.run_pending()
         time.sleep(1)
 
-def close_browser():
-    global browser
-    if browser:
-        browser.quit()
-        st.success("Browser closed successfully.")
+def close_browsers():
+    global browsers
+    if browsers:
+        browsers.quit()
+        st.success("browsers closed successfully.")
 
 
         
@@ -1028,7 +1028,7 @@ schedule_thread.start()
 if __name__ == "__main__":
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
-    browser=run_selenium(logpath=logpath)
+    browsers=run_selenium(logpath=logpath)
     st.set_page_config(page_title="FB Automate", page_icon='✅',
         initial_sidebar_state='collapsed')
     st.title('Facebook Posts Automation')
