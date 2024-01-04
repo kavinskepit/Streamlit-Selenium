@@ -29,6 +29,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+import tempfile
+
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
 MON_KEY = st.secrets['MON_KEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
