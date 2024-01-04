@@ -112,7 +112,7 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 
 #function that generates images using monster API    
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 def content_generator(restuarant_name, location, nature_of_cuisine, occasion, offer):
     prompt = f"You are a prompt engineering assistant. Create a Facebook post for resturant {restuarant_name} at location {location} and my nature of cuisine is {nature_of_cuisine} for the {occasion} occasion and we are giving flat {offer} discount  and add relevant tags. Generate content without user involvement and limit to 50 words"
     #Generate content for the Facebook post using GPT-3.5 Turbo
@@ -129,7 +129,7 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
     return content
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 def save_uploaded_file(uploaded_file):
     temp_dir = tempfile.gettempdir()
     file_path = os.path.join(temp_dir, uploaded_file.name)
@@ -368,6 +368,7 @@ def app_creation(username, password, App_name):
     #browsers = webdriver.Chrome(service=service, options=chrome_options)
     #facebook login
     browsers.get("http://www.facebook.com")
+    
 
     username_elem = browsers.find_element(By.ID, "email")
     password_elem = browsers.find_element(By.ID, "pass")
@@ -397,6 +398,7 @@ def app_creation(username, password, App_name):
         profile_name = container.find_element(By.CSS_SELECTOR, '.x1yc453h').text
         profile_names.append(profile_name)
     selected_profile = st.selectbox("Select a profile", profile_names)
+    time.sleep(10)
     for container in profile_containers:
         profile_name = container.find_element(By.CSS_SELECTOR, '.x1yc453h').text
         if profile_name == selected_profile:
@@ -431,20 +433,19 @@ def app_creation(username, password, App_name):
             time.sleep(4)
             browsers.get("https://business.facebook.com/login/?next=https%3A%2F%2Fdevelopers.facebook.com%2F%3Fbiz_login_source%3Dbizweb_unified_login_fb_login_button")
             browsers.maximize_window() 
+            time.sleep(4)
             element_to_click = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div[2]/div/div[2]/ul/li[5]/a/div[1]")
-
-     
             element_to_click.click()
             #time.sleep(4)
             create_newapp = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div/div[1]/div[3]/div[2]/div/div")
      
         # Click the element
             create_newapp.click()
-            #time.sleep(4)
+            time.sleep(4)
             usecase_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[2]/div[2]/div[2]/div[4]/div/div/div/div/div")
               # Click the element
             usecase_button.click()
-            #time.sleep(4)
+            time.sleep(4)
      
      
             #click next button
@@ -455,7 +456,7 @@ def app_creation(username, password, App_name):
             #select app type
             apptype_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[2]/div/div/div/div/div[3]/div/div[2]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div[1]/div")
             apptype_button.click()
-            #time.sleep(4)
+            time.sleep(4)
      
             #close notification
             notification_button = browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[3]/div/div/div/div/form/div/div/button")
@@ -525,6 +526,7 @@ def app_creation(username, password, App_name):
             #graph api explorer
             graph_api_button = browsers.find_element(By.XPATH, '/html/body/div[1]/div[5]/div[2]/div/div/div[2]/div[1]/div[1]')
             graph_api_button.click()
+            time.sleep(4)
 
  
 
@@ -534,7 +536,7 @@ def app_creation(username, password, App_name):
             EC.element_to_be_clickable((By.XPATH, button_xpath))
             )   
             button_element.click()
-            time.sleep(6)
+            time.sleep(10)
 
 
 
@@ -574,6 +576,7 @@ def app_creation(username, password, App_name):
 
             # Click on each element
             for element in elements:
+                time.sleep(1)
                 element.click()
             permissions.click()
 
@@ -960,7 +963,7 @@ def initialize_user_data():
     return user_data
 
 
-@st.cache_data
+@st.cache_resource(show_spinner=False)
 #posting to facebook page
 def post_to_facebook_demo(access_token, page_id, message, image_path):
     image_url = image_path
@@ -983,7 +986,7 @@ def post_to_facebook_demo(access_token, page_id, message, image_path):
     else:
         print(f"Failed to download image. Status code: {image_response.status_code}")
 #function to post the uploaded file by the user
-@st.cache_data        
+@st.cache_resource(show_spinner=False)
 def post_to_facebook_demo_file_upload(access_token, page_id, message, image_path):
     #image_url = image_path
     #image_response = requests.get(image_url)
@@ -1011,6 +1014,7 @@ def run_schedule():
 def close_browsers():
     global browsers
     if browsers:
+        st.runtime.legacy_caching.clear_cache()
         browsers.quit()
         st.success("browsers closed successfully.")
 
