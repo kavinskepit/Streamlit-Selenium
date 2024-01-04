@@ -30,7 +30,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
-
+MONKEY = st.secrets['MONKEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
         
 @st.cache_resource(show_spinner=False)
@@ -113,19 +113,19 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 #function that generates images using monster API    
 @st.cache_data
 def image_generator(other_keywords):
-    #api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjBhOTBhZWVhZWRjYjk5ZGVjNWE4YzgyOGNiNDZjZDQwIiwiY3JlYXRlZF9hdCI6IjIwMjMtMTItMjVUMTY6MTg6MDQuNTczNDMyIn0.8Ku0_-xJ0a7Ug79HvzsecIG_iakmH2VXdZzC7c0SE8o'  # Your API key here
-    #monster_client = client(api_key)
-    #model = 'sdxl-base'
-    #input_data = {
-    #    'prompt': other_keywords,
-    #    'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
-    #    'samples': 2,
-    #    'steps': 50,
-    #    'aspect_ratio': 'square',
-    #    'guidance_scale': 7.5,
-    #    'seed': 2414,
-    #    }
-    #result = monster_client.generate(model, input_data)
+    api_key = MONKEY  # Your API key here
+    monster_client = client(api_key)
+    model = 'sdxl-base'
+    input_data = {
+        'prompt': other_keywords,
+        'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
+        'samples': 2,
+        'steps': 50,
+        'aspect_ratio': 'square',
+        'guidance_scale': 7.5,
+        'seed': 2414,
+        }
+    result = monster_client.generate(model, input_data)
 
     #image_urls = result['output']
     image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
