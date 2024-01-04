@@ -538,7 +538,7 @@ def app_creation(username, password, App_name):
             EC.element_to_be_clickable((By.XPATH, button_xpath))
             )   
             button_element.click()
-            time.sleep(6)
+            time.sleep(16)
 
 
 
