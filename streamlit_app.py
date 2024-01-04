@@ -379,18 +379,18 @@ def app_creation(username, password, App_name):
     username_elem.send_keys(username)
     password_elem.send_keys(password)
     button.click()
-    time.sleep(8)  # Waiting for the page to load
+    time.sleep(10)  # Waiting for the page to load
 # facebook login
     outer_profile_element = WebDriverWait(browsers, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, ".x14yjl9h.xudhj91.x18nykt9.xww2gxu.x10l6tqk.xhtitgo"))
     )
     outer_profile_element.click()
-    time.sleep(8)
+    time.sleep(10)
     inner_profile_element = WebDriverWait(browsers, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, '.x1i10hfl.xjbqb8w.x6umtig.x1b1mbwd.xaqea5y.xav7gou.x1ypdohk.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x16tdsg8.x1hl2dhg.xggy1nq.x1o1ewxj.x3x9cwd.x1e5q0jg.x13rtm0m.x87ps6o.x1lku1pv.x1a2a7pz.x9f619.x3nfvp2.xdt5ytf.xl56j7k.x1n2onr6.xh8yej3'))
     )
     inner_profile_element.click()
-    time.sleep(8)
+    time.sleep(10)
     profile_containers = WebDriverWait(browsers, 10).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.x1i10hfl.x1qjc9v5.xjbqb8w.xjqpnuy.xa49m3k.xqeqjp1.x2hbi6w.x13fuv20.xu3j5b3.x1q0q8m5.x26u7qi.x972fbf.xcfux6l.x1qhh985.xm0m39n.x9f619.x1ypdohk.xdl72j9.x2lah0s.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x2lwn1j.xeuugli.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1n2onr6.x16tdsg8.x1hl2dhg.xggy1nq.x1ja2u2z.x1t137rt.x1q0g3np.x87ps6o.x1lku1pv.x1a2a7pz.x1lq5wgf.xgqcy7u.x30kzoy.x9jhf4c.x1lliihq[role="radio"]'))
     )
