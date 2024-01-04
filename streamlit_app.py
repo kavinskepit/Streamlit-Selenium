@@ -522,6 +522,7 @@ def app_creation(username, password, App_name):
             #link_element.click()
 
             #tools
+            time.sleep(10)
             tools_button= browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div/div[1]/div/div/div/div/div/div[2]/a[2]")
             tools_button.click()
             time.sleep(4)
