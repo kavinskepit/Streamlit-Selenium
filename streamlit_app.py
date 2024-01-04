@@ -141,7 +141,6 @@ def save_uploaded_file(uploaded_file):
 
 
 #function that displays content and defines the UI (Main)
-@st.cache_resource(show_spinner=False)
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
     global browsers
 
