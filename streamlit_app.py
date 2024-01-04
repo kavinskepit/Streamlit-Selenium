@@ -112,7 +112,7 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 
 #function that generates images using monster API    
-@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
+#@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 def content_generator(restuarant_name, location, nature_of_cuisine, occasion, offer):
     prompt = f"You are a prompt engineering assistant. Create a Facebook post for resturant {restuarant_name} at location {location} and my nature of cuisine is {nature_of_cuisine} for the {occasion} occasion and we are giving flat {offer} discount  and add relevant tags. Generate content without user involvement and limit to 50 words"
     #Generate content for the Facebook post using GPT-3.5 Turbo
