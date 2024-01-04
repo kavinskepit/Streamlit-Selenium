@@ -1098,7 +1098,7 @@ if __name__ == "__main__":
                     st.error("Invalid user credentials. Please try again.")
                         
         if st.button("Close Application"):
-                st.cache.clear()
+                st.cache.clear_cache()
                 st.experimental_rerun()
         
 
