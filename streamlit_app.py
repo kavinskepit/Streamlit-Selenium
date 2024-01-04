@@ -63,12 +63,12 @@ def get_webdriver_service(logpath):
     )
     return service
 
-
+@st.cache_resource(show_spinner=False)
 def delete_selenium_log(logpath):
     if os.path.exists(logpath):
         os.remove(logpath)
 
-
+@st.cache_resource(show_spinner=False)
 def show_selenium_log(logpath):
     if os.path.exists(logpath):
         with open(logpath) as f:
@@ -89,7 +89,7 @@ def validate_user_credentials(username, password):
     # Replace this with your validation logic
     return username == "Skepitglobal" and password == "Skepitglobal"
 
-
+@st.cache_resource(show_spinner=False)
 #function that generates text content for facebook post using Chat GPT
 def content_generator(restuarant_name, location, nature_of_cuisine, occasion, offer):
     prompt = f"You are a prompt engineering assistant. Create a Facebook post for resturant {restuarant_name} at location {location} and my nature of cuisine is {nature_of_cuisine} for the {occasion} occasion and we are giving flat {offer} discount  and add relevant tags. Generate content without user involvement and limit to 50 words"
@@ -357,7 +357,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
 
 
 
-
+@st.cache_resource(show_spinner=False)
 #function for app automation
 def app_creation(username, password, App_name):
     #facebook login
