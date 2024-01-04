@@ -30,7 +30,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
-MONKEY = st.secrets['MONKEY']
+MON_KEY = st.secrets['MON_KEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
         
 @st.cache_resource(show_spinner=False)
@@ -112,7 +112,7 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 #function that generates images using monster API    
 @st.cache_resource(show_spinner=False)
 def image_generator(other_keywords):
-    api_key = MONKEY  # Your API key here
+    api_key = MON_KEY  # Your API key here
     monster_client = client(api_key)
     model = 'sdxl-base'
     input_data = {
