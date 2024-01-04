@@ -114,24 +114,28 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 #function that generates images using monster API    
 @st.cache_resource(show_spinner=False)
 def image_generator(other_keywords):
-    api_key = MON_KEY  # Your API key here
-    monster_client = client(api_key)
-    model = 'sdxl-base'
-    input_data = {
-        'prompt': other_keywords,
-        'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
-        'samples': 2,
-        'steps': 50,
-        'aspect_ratio': 'square',
-        'guidance_scale': 7.5,
-        'seed': 2414,
-        }
-    result = monster_client.generate(model, input_data)
+    try:
+        api_key = MON_KEY  # Your API key here
+        monster_client = client(api_key)
+        model = 'sdxl-base'
+        input_data = {
+                'prompt': other_keywords,
+                'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
+                'samples': 2,
+                'steps': 50,
+                'aspect_ratio': 'square',
+                'guidance_scale': 7.5,
+                'seed': 2414,
+                }
+        result = monster_client.generate(model, input_data)
     
 
-    image_urls = result['output']
-    #image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
-    return image_urls
+        image_urls = result['output']
+        #image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
+        return image_urls
+    except:
+        st.write("uncheck and check the run checkbox")
+  
 
 
 @st.cache_resource(show_spinner=False)
