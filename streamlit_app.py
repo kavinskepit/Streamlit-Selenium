@@ -564,12 +564,12 @@ def app_creation(username, password, App_name):
             # Wait for the menu items to be present
             menu_items = WebDriverWait(browsers, 10).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.uiContextualLayer ul[role="menu"] li a[role="menuitem"]')))
-            time.sleep(6)
+            time.sleep(8)
 
             # Click on each permissions ans sub permissions
             for item in menu_items:
                 item.click()
-            time.sleep(6)
+            time.sleep(10)
 
             elements = WebDriverWait(browsers, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "_2wpb._3v8w"))
@@ -581,7 +581,7 @@ def app_creation(username, password, App_name):
             permissions.click()
 
 
-            time.sleep(4)
+            time.sleep(8)
             #scroll up teh window
             element = browsers.find_element(By.XPATH,'/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]')
             # Scroll the element into view
@@ -589,6 +589,7 @@ def app_creation(username, password, App_name):
 
 
             original_window_handle = browsers.current_window_handle
+            time.sleep(8)
 
 
 
@@ -613,6 +614,7 @@ def app_creation(username, password, App_name):
             all_window_handles = browsers.window_handles
             new_window_handle = [handle for handle in all_window_handles if handle != browsers.current_window_handle][0]
             browsers.switch_to.window(new_window_handle)
+            time.sleep(4)
 
             button0 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[2]/div[1]/form/div/div[3]/div/div[1]")))
             button0.click()
