@@ -241,6 +241,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                                         #image_path = save_uploaded_file(uploaded_file)
                                         post_to_facebook_demo_schedule_image_url(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
                                         st.success("Post scheduled successfully!")
+                                        st.cache_resource.clear()
                                     except Exception as e:
                                         st.error(f"Error scheduling post: {e}")
                                 else:
@@ -248,8 +249,10 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                         if st.checkbox("Post Now"):
                             post_to_facebook_demo(access_token, page_id, message, image_path)
                             st.success("Post published successfully.")
+                            st.cache_resource.clear()
                         # Button to close the browsers
                             if st.button("Close browsers"):
+                                st.cache_resource.clear()
                                 close_browsers()
                     else:
                         st.warning("Please enter both Facebook username and password.")
@@ -332,6 +335,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                                     image_path = save_uploaded_file(uploaded_file)
                                     post_to_facebook_demo_schedule_file_upload(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
                                     st.success("Post scheduled successfully!")
+                                    st.cache_resource.clear()
                                 except Exception as e:
                                     st.error(f"Error scheduling post: {e}")
                             else:
@@ -346,8 +350,10 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                     if st.checkbox("Post Now"):
                         post_to_facebook_demo_file_upload(access_token, page_id, message, image_path)
                         st.success("Post published successfully.")
+                        st.cache_resource.clear()
                     # Button to close the browsers
                         if st.button("Close browsers"):
+                            st.cache_resource.clear()
                             close_browsers()
                 else:
                     st.warning("Please enter both Facebook username and password.")
@@ -359,7 +365,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
 
 
 
-@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
+#@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 #function for app automation
 def app_creation(username, password, App_name):
     #facebook login
@@ -1027,6 +1033,7 @@ schedule_thread.start()
 
 
 if __name__ == "__main__":
+    st.cache_resource.clear()
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
     browsers=run_selenium(logpath=logpath)
