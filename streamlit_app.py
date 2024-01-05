@@ -530,9 +530,12 @@ def app_creation(username, password, App_name):
 
             #tools
             time.sleep(14)
-            tools_button= browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div/div[1]/div/div/div/div/div/div[2]/a[2]")
-            tools_button.click()
-            time.sleep(4)
+            try:
+                tools_button= browsers.find_element(By.XPATH, "/html/body/div[1]/div[5]/div[1]/div/div[1]/div/div/div/div/div/div[2]/a[2]")
+                tools_button.click()
+                time.sleep(4)
+            except:
+                st.write("15 apps are created max limit reached")
 
             #graph api explorer
             graph_api_button = browsers.find_element(By.XPATH, '/html/body/div[1]/div[5]/div[2]/div/div/div[2]/div[1]/div[1]')
