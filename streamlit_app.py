@@ -561,17 +561,17 @@ def app_creation(username, password, App_name):
  
                 item_element.click()
             except:
-                time.sleep(60)
-                css_selector = f'div._5xzw[role="menuitem"] span[data-tooltip-content="{App_name}"]'
+                css_selector = f'div._5xzw[role="menuitem"] span:contains("{App_name}")'
 
                 # Find the element using the constructed CSS selector
-                element = browser.find_element('css selector', css_selector)
+                element = driver.find_element('css selector', css_selector)
 
                 # Perform any actions you want with the selected element
                 print(f"Element with text '{App_name}' found!")
                 # For example, click on the element
                 element.click()
-                time.sleep(2)
+                
+                
             time.sleep(6)
 
 
