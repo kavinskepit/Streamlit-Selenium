@@ -700,6 +700,8 @@ def app_creation(username, password, App_name):
 
             access_token = browsers.find_element(By.XPATH,"/html/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[2]/div/div/div[1]/label/input")
             #access token
+            browsers.quit()
+
             value = access_token.get_attribute("value")
             #value="EAAKfwS1Vv6cBOwLlyyhgbTcsoXO2fPdqAEXUQ9O6UgPWRj1bkoZCkNy8wGCPsZADyX6fPQOZAb8gR1T9G8zIPyz9fsNJrGughQtSd4IZBg9L1WbI0ZBAv8ZB15aWnZBvu3tU6B1heTYUuf1R9w52DuL43mozw4HsMb9NaR3ruiP9nGcZCEaqx3k883NjtiAeCt55kCOQLtfuIMSf9gLh434Ru2SGuSJndqUKd2MZD"
          
