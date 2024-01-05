@@ -359,7 +359,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
 
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 #function for app automation
 def app_creation(username, password, App_name):
     #facebook login
@@ -1096,8 +1096,9 @@ if __name__ == "__main__":
                 else:
                     st.error("Invalid user credentials. Please try again.")
                         
-        if st.button("Close Application"):
-                st.runtime.legacy_caching.clear_cache() 
-                st.experimental_rerun()
+        if st.button("Clear Application"):
+                #st.runtime.legacy_caching.clear_cache() 
+                st.cache_resource.clear()
+                #st.experimental_rerun()
         
 
