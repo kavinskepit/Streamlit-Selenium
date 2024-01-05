@@ -550,7 +550,7 @@ def app_creation(username, password, App_name):
 
 
             item_xpath = f'//div[contains(., "{App_name}")]/span[@class="_5xzx"]'
-            time.sleep(14)
+            time.sleep(6)
 
             item_element = WebDriverWait(browsers, 60).until(
             EC.element_to_be_clickable((By.XPATH, item_xpath))
@@ -1104,8 +1104,8 @@ if __name__ == "__main__":
                     st.error("Invalid user credentials. Please try again.")
                         
         if st.button("Clear Application"):
-                #st.runtime.legacy_caching.clear_cache() 
-                st.cache_resource.clear()
-                #st.experimental_rerun()
+            #st.runtime.legacy_caching.clear_cache() 
+            st.cache_resource.clear()
+            #st.experimental_rerun()
         
 
