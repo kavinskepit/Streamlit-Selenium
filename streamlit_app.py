@@ -390,17 +390,17 @@ def app_creation(username, password, App_name):
     button.click()
     time.sleep(4)  # Waiting for the page to load
 # facebook login
-    outer_profile_element = WebDriverWait(browsers, 10).until(
+    outer_profile_element = WebDriverWait(browsers, 40).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, ".x14yjl9h.xudhj91.x18nykt9.xww2gxu.x10l6tqk.xhtitgo"))
     )
     outer_profile_element.click()
     time.sleep(4)
-    inner_profile_element = WebDriverWait(browsers, 10).until(
+    inner_profile_element = WebDriverWait(browsers, 40).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, '.x1i10hfl.xjbqb8w.x6umtig.x1b1mbwd.xaqea5y.xav7gou.x1ypdohk.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x16tdsg8.x1hl2dhg.xggy1nq.x1o1ewxj.x3x9cwd.x1e5q0jg.x13rtm0m.x87ps6o.x1lku1pv.x1a2a7pz.x9f619.x3nfvp2.xdt5ytf.xl56j7k.x1n2onr6.xh8yej3'))
     )
     inner_profile_element.click()
     time.sleep(4)
-    profile_containers = WebDriverWait(browsers, 10).until(
+    profile_containers = WebDriverWait(browsers, 40).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.x1i10hfl.x1qjc9v5.xjbqb8w.xjqpnuy.xa49m3k.xqeqjp1.x2hbi6w.x13fuv20.xu3j5b3.x1q0q8m5.x26u7qi.x972fbf.xcfux6l.x1qhh985.xm0m39n.x9f619.x1ypdohk.xdl72j9.x2lah0s.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x2lwn1j.xeuugli.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1n2onr6.x16tdsg8.x1hl2dhg.xggy1nq.x1ja2u2z.x1t137rt.x1q0g3np.x87ps6o.x1lku1pv.x1a2a7pz.x1lq5wgf.xgqcy7u.x30kzoy.x9jhf4c.x1lliihq[role="radio"]'))
     )
     st.write("Profiles and Business pages")
@@ -416,24 +416,24 @@ def app_creation(username, password, App_name):
             time.sleep(3)
             time.sleep(4)
             business_page_name = selected_profile
-            business_page_element = WebDriverWait(browsers, 10).until(
+            business_page_element = WebDriverWait(browsers, 40).until(
                 EC.element_to_be_clickable((By.XPATH, f'//span[text()="{business_page_name}"]'))
             )
             business_page_element.click()
             time.sleep(4)
         
         
-            about_element = WebDriverWait(browsers, 10).until(
+            about_element = WebDriverWait(browsers, 40).until(
                     EC.element_to_be_clickable((By.XPATH, '//span[text()="About"]'))
                 )
             about_element.click()
-            page_transparency_element = WebDriverWait(browsers, 10).until(
+            page_transparency_element = WebDriverWait(browsers, 40).until(
                 EC.element_to_be_clickable((By.XPATH, '//span[text()="Page transparency"]'))
             )
             page_transparency_element.click()
             time.sleep(8)
             xpath = '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div/div/div[4]/div/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[1]/span'
-            page_id_element = WebDriverWait(browsers, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            page_id_element = WebDriverWait(browsers, 40).until(EC.presence_of_element_located((By.XPATH, xpath)))
             page_id = page_id_element.text
             print("Page ID:", page_id)
             time.sleep(4)
@@ -542,7 +542,7 @@ def app_creation(username, password, App_name):
 
             # Wait for the menu to be present
             button_xpath = '//*[@id="facebook"]/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[5]/div/button'
-            button_element = WebDriverWait(browsers, 10).until(
+            button_element = WebDriverWait(browsers, 40).until(
             EC.element_to_be_clickable((By.XPATH, button_xpath))
             )   
             button_element.click()
@@ -571,7 +571,7 @@ def app_creation(username, password, App_name):
  
  
             # Wait for the menu items to be present
-            menu_items = WebDriverWait(browsers, 10).until(
+            menu_items = WebDriverWait(browsers, 40).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.uiContextualLayer ul[role="menu"] li a[role="menuitem"]')))
             time.sleep(6)
 
@@ -580,7 +580,7 @@ def app_creation(username, password, App_name):
                 item.click()
             time.sleep(6)
 
-            elements = WebDriverWait(browsers, 10).until(
+            elements = WebDriverWait(browsers, 40).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "_2wpb._3v8w"))
             )
 
@@ -602,7 +602,7 @@ def app_creation(username, password, App_name):
 
 
             #clicking the generate button
-            generate_token_button = WebDriverWait(browsers, 10).until(
+            generate_token_button = WebDriverWait(browsers, 40).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="facebook"]/body/div[1]/div[5]/div[2]/div/div[2]/span/div/div[2]/div/div[5]/div[5]/div/div/div/div/div/div[2]/div/button'))
             )
 
@@ -616,78 +616,78 @@ def app_creation(username, password, App_name):
             #browsers.switch_to.window(window_after)
 
 
-            new_window_handle = WebDriverWait(browsers, 10).until(EC.number_of_windows_to_be(2))
+            new_window_handle = WebDriverWait(browsers, 40).until(EC.number_of_windows_to_be(2))
 
             # Switch to the new window
             all_window_handles = browsers.window_handles
             new_window_handle = [handle for handle in all_window_handles if handle != browsers.current_window_handle][0]
             browsers.switch_to.window(new_window_handle)
 
-            button0 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[2]/div[1]/form/div/div[3]/div/div[1]")))
+            button0 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[2]/div[1]/form/div/div[3]/div/div[1]")))
             button0.click()
             time.sleep(10)
          
-            button1 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div[2]")))
+            button1 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div[2]")))
             button1.click()   
             time.sleep(10)
 
             try:
-                button2 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
+                button2 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
                 button2.click()
                 time.sleep(10)
             except:
-                button2 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
+                button2 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
                 button2.click()
                 time.sleep(10)
                 
 
-            button3 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+            button3 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
             button3.click()
             time.sleep(10)
 
-            button4 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
+            button4 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
             button4.click()
             time.sleep(10)
 
-            button5 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "//html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+            button5 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "//html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
             button5.click()
             time.sleep(10)
 
-            button6 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
+            button6 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
             button6.click()
             time.sleep(10)
 
             try:
-                button7 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
+                button7 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/label/div/div/div[1]/div")))
                 button7.click()
                 time.sleep(10)
             except:
-                button7 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
+                button7 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[3]/div/div/div[2]/div[2]/div")))
                 button7.click()
                 time.sleep(10)
 
             try:
-                button8 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+                button8 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
                 button8.click()
                 time.sleep(10)
             except:
-                button8 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+                button8 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
                 button8.click()
                 time.sleep(10)
                 
          
             try:
-                button9 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
+                button9 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div")))
                 button9.click()
                 time.sleep(10)
             except:
-                button9 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
+                button9 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
                 button9.click()
                 time.sleep(10)
                 
          
             try:
-                button10 = WebDriverWait(browsers, 10).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
+                button10 = WebDriverWait(browsers, 40).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div/div/div/form/div/div/div/div/div/div[2]/div/div[2]/div/div/div[2]/div/div")))
                 button10.click()
                 time.sleep(10)
             except:
