@@ -564,6 +564,7 @@ def app_creation(username, password, App_name):
  
                 item_element.click()
             except:
+                time.sleep(10)
                 css_selector = f'div._5xzw[role="menuitem"] span:contains("{App_name}")'
 
                 # Find the element using the constructed CSS selector
