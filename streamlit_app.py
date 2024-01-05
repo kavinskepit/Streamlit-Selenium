@@ -550,15 +550,27 @@ def app_creation(username, password, App_name):
 
 
 
-            item_xpath = f'//div[contains(., "{App_name}")]/span[@class="_5xzx"]'
-            time.sleep(6)
+            try:
+                item_xpath = f'//div[contains(., "{App_name}")]/span[@class="_5xzx"]'
+                time.sleep(6)
 
-            item_element = WebDriverWait(browsers, 60).until(
-            EC.element_to_be_clickable((By.XPATH, item_xpath))
-            )
-            time.sleep(2)
+                item_element = WebDriverWait(browsers, 60).until(
+                EC.element_to_be_clickable((By.XPATH, item_xpath))
+                )
+                time.sleep(2)
  
-            item_element.click()
+                item_element.click()
+            except:
+                css_selector = f'div._5xzw[role="menuitem"] span[data-tooltip-content="{App_name}"]'
+
+                # Find the element using the constructed CSS selector
+                element = browser.find_element('css selector', css_selector)
+
+                # Perform any actions you want with the selected element
+                print(f"Element with text '{App_name}' found!")
+                # For example, click on the element
+                element.click()
+                time.sleep(2)
             time.sleep(6)
 
 
