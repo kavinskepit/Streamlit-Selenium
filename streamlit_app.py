@@ -1053,7 +1053,9 @@ schedule_thread.start()
 
 
 if __name__ == "__main__":
+    st.set_page_config(page_title="FB Automate", page_icon='✅')
     st.cache_resource.clear()
+    
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
     browsers=run_selenium(logpath=logpath)
