@@ -184,7 +184,6 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                         #login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)
                         page_id,permanant_access_token = app_creation(username, password, App_name)
                                 #image_path = 'image.jpeg'
-                        browsers.quit()
                         access_token = permanant_access_token  # Your Facebook access token here
                                 #page_id = '179897971873271'  # Your Facebook page ID here
                         message = str(modified_content)
