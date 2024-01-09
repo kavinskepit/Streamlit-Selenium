@@ -356,7 +356,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                 else:
                     st.warning("Please enter both Facebook username and password.")
                     
-    return browser, selected_profile
+    return browsers, selected_profile
 
 
 
