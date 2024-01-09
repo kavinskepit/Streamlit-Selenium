@@ -155,7 +155,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
     image_urls= image_generator(other_keywords)
 
 
-    # Display all images with buttons 
+    # Display all images with buttons
     for i, image_url in enumerate(image_urls):
         st.image(image_url, caption=f'Image {i + 1}', use_column_width=True, width=200)
     selected_image_index = st.text_input("Enter the image you want to choose (e.g., 1)",key="selected image")
@@ -204,9 +204,14 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                             image_path = image_response.content
                             
                             caption = modified_content
+                        
+                            
+                            
+
                             # Replace with your User Access Token, Page ID, and desired API version
                             user_access_token = permanant_access_token
                             
+
                             api_version = "v13.0"
 
                             # Make a request to get the Page Access Token
@@ -240,7 +245,6 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                                         #image_path = save_uploaded_file(uploaded_file)
                                         post_to_facebook_demo_schedule_image_url(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
                                         st.success("Post scheduled successfully!")
-                                        st.cache_resource.clear()
                                     except Exception as e:
                                         st.error(f"Error scheduling post: {e}")
                                 else:
@@ -248,11 +252,9 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                         if st.checkbox("Post Now"):
                             post_to_facebook_demo(access_token, page_id, message, image_path)
                             st.success("Post published successfully.")
-                            st.cache_resource.clear()
-                        # Button to close the browsers
-                            if st.button("Close browsers"):
-                                st.cache_resource.clear()
-                                close_browsers()
+                        # Button to close the browser
+                            if st.button("Close Browser"):
+                                close_browser()
                     else:
                         st.warning("Please enter both Facebook username and password.")
             else:
@@ -334,7 +336,6 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                                     image_path = save_uploaded_file(uploaded_file)
                                     post_to_facebook_demo_schedule_file_upload(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
                                     st.success("Post scheduled successfully!")
-                                    st.cache_resource.clear()
                                 except Exception as e:
                                     st.error(f"Error scheduling post: {e}")
                             else:
@@ -349,17 +350,13 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                     if st.checkbox("Post Now"):
                         post_to_facebook_demo_file_upload(access_token, page_id, message, image_path)
                         st.success("Post published successfully.")
-                        st.cache_resource.clear()
-                    # Button to close the browsers
-                        if st.button("Close browsers"):
-                            st.cache_resource.clear()
-                            close_browsers()
+                    # Button to close the browser
+                        if st.button("Close Browser"):
+                            close_browser()
                 else:
                     st.warning("Please enter both Facebook username and password.")
                     
-    return browsers, selected_profile
-
-
+    return browser, selected_profile
 
 
 
