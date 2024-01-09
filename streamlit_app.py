@@ -140,7 +140,7 @@ def save_uploaded_file(uploaded_file):
         f.write(uploaded_file.getvalue())
     return file_path
 
-
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 #function that displays content and defines the UI (Main)
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
     global browsers
