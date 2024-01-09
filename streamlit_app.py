@@ -790,6 +790,7 @@ def app_creation(username, password, App_name):
          
             pageid = page_id
             access_token = permanant_access_token
+            browsers.quit()
         
         
     
