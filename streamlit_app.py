@@ -34,15 +34,15 @@ import tempfile
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
 MON_KEY = st.secrets['MON_KEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
-        
+@st.cache_resource(show_spinner=False)        
 def get_logpath():
     return os.path.join(os.getcwd(), 'selenium.log')
 
-
+@st.cache_resource(show_spinner=False)
 def get_chromedriver_path():
     return shutil.which('chromedriver')
 
-
+@st.cache_resource(show_spinner=False)
 def get_webdriver_options():
     options = Options()
     options.add_argument("--headless")
