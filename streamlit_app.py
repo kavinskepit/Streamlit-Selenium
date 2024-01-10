@@ -361,7 +361,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
 
 
 
-@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 #function for app automation
 def app_creation(username, password, App_name):
     #facebook login
