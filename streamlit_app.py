@@ -99,7 +99,7 @@ def run_selenium(logpath):
     #driver_path = chromedriver_autoinstaller.install(cwd=True)
 
     browsers=webdriver.Chrome(options=chrome_options)
-    browsers=webdriver.Chrome(executable_path=os.environ.get("GOOGLE_CHROME_BIN"))
+    browsers=webdriver.Chrome(executable_path=os.environ.get("GOOGLE_CHROME_BIN"), options=chrome_options)
     #browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
         
