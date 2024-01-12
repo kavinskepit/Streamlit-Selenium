@@ -30,9 +30,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import tempfile
-import chromedriver_autoinstaller
+#import chromedriver_autoinstaller
 
-chromedriver_autoinstaller.install()
+#chromedriver_autoinstaller.install()
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 #os.environ.get('DATABASE_URL')
@@ -96,7 +96,7 @@ def run_selenium(logpath):
     chrome_options.add_argument("--window-size=1920x1080")
     chrome_options.add_argument("--disable-features=VizDisplayCompositor")
     
-    driver_path = chromedriver_autoinstaller.install(cwd=True)
+    #driver_path = chromedriver_autoinstaller.install(cwd=True)
 
     browsers=webdriver.Chrome(options=chrome_options)
     #browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
