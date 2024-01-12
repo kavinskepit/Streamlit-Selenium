@@ -66,6 +66,8 @@ def get_webdriver_service(logpath):
     )
     return service
 
+
+
 def delete_selenium_log(logpath):
     if os.path.exists(logpath):
         os.remove(logpath)
@@ -79,7 +81,25 @@ def show_selenium_log(logpath):
         st.warning('No log file found!')
 
 def run_selenium(logpath):
-    browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')  # Adjust based on your needs
+    chrome_options.add_argument('--disable-gpu')
+    
+    # If running on a headless server, you might need to use the following options:
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-features=NetworkService")
+    chrome_options.add_argument("--window-size=1920x1080")
+    chrome_options.add_argument("--disable-features=VizDisplayCompositor")
+    
+    driver_path = chromedriver_autoinstaller.install(cwd=True)
+
+    browsers=webdriver.Chrome(executable_path=driver_path, options=chrome_options)
+    #browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
         
     return browsers
