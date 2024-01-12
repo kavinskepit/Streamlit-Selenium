@@ -82,9 +82,9 @@ def show_selenium_log(logpath):
 
 def run_selenium(logpath):
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')  # Adjust based on your needs
-    chrome_options.add_argument('--disable-gpu')
-    
+    #chrome_options.add_argument('--headless')  # Adjust based on your needs
+    #chrome_options.add_argument('--disable-gpu')
+    chrome_options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
     # If running on a headless server, you might need to use the following options:
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
@@ -99,6 +99,7 @@ def run_selenium(logpath):
     #driver_path = chromedriver_autoinstaller.install(cwd=True)
 
     browsers=webdriver.Chrome(options=chrome_options)
+    browsers=webdriver.Chrome(executable_path=os.environ.get("GOOGLE_CHROME_BIN"))
     #browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
         
