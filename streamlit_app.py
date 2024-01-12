@@ -30,6 +30,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import tempfile
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 #os.environ.get('DATABASE_URL')
