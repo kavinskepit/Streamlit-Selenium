@@ -7,3 +7,4 @@ schedule
 monsterapi
 MouseInfo
 facebook-sdk
+chromedriver_autoinstaller
