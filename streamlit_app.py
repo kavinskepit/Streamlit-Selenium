@@ -108,8 +108,8 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 #function that generates images using monster API    
 
-#@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
-#def image_generator(other_keywords):
+@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
+def image_generator(other_keywords):
 #    max_wait_time=300
 #    api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMyYTZhMmFkZDhlMWIyODdjODI1NGM4MmU0OTVjM2UzIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDEtMDRUMDY6MTg6NTQuNjMxODM4In0.LYY0PAaj4F0dj25V2elQaErz8u7pZJITnhL9qAc2lx8'  # Your API key here
 #    
