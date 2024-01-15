@@ -74,7 +74,6 @@ def show_selenium_log(logpath):
     else:
         st.warning('No log file found!')
 
-
 def run_selenium(logpath):
     browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
@@ -110,25 +109,25 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 @st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 def image_generator(other_keywords):
-#    max_wait_time=300
-#    api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMyYTZhMmFkZDhlMWIyODdjODI1NGM4MmU0OTVjM2UzIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDEtMDRUMDY6MTg6NTQuNjMxODM4In0.LYY0PAaj4F0dj25V2elQaErz8u7pZJITnhL9qAc2lx8'  # Your API key here
-#    
-#    monster_client = client(api_key)
-#    model = 'sdxl-base'
-#    input_data = {
-#        'prompt': other_keywords,
-#        'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
-#       'samples': 2,
-#        'steps': 50,
-#        'aspect_ratio': 'square',
-#        'guidance_scale': 7.5,
-#        'seed': 2414,
-#        }
-#    result = monster_client.generate(model, input_data)
+    #max_wait_time=300
+    #api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMyYTZhMmFkZDhlMWIyODdjODI1NGM4MmU0OTVjM2UzIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDEtMDRUMDY6MTg6NTQuNjMxODM4In0.LYY0PAaj4F0dj25V2elQaErz8u7pZJITnhL9qAc2lx8'  # Your API key here
+    
+    #monster_client = client(api_key)
+    #model = 'sdxl-base'
+    #input_data = {
+    #    'prompt': other_keywords,
+    #    'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
+    #    'samples': 2,
+    #    'steps': 50,
+    #    'aspect_ratio': 'square',
+    #    'guidance_scale': 7.5,
+    #    'seed': 2414,
+    #    }
+    #result = monster_client.generate(model, input_data)
     
     
 
-#    image_urls = result['output']
+    #image_urls = result['output']
     image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
     return image_urls
 
@@ -564,7 +563,7 @@ def app_creation(username, password, App_name):
  
                 item_element.click()
             except:
-                time.sleep(10)
+                time.sleep(20)
                 css_selector = f'div._5xzw[role="menuitem"] span:contains("{App_name}")'
 
                 # Find the element using the constructed CSS selector
@@ -791,6 +790,7 @@ def app_creation(username, password, App_name):
          
             pageid = page_id
             access_token = permanant_access_token
+            browsers.quit()
         
         
     
@@ -1053,7 +1053,7 @@ schedule_thread.start()
 
 
 if __name__ == "__main__":
-    st.cache_resource.clear()
+    st.cache_resource.clear()    
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
     browsers=run_selenium(logpath=logpath)
@@ -1128,3 +1128,4 @@ if __name__ == "__main__":
             st.cache_resource.clear()
             #st.experimental_rerun()
         
+
