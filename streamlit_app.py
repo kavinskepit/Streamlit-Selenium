@@ -32,7 +32,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import tempfile
 
 OPENAI_API_KEY = "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"
-MON_KEY = st.secrets['MON_KEY']
+#MON_KEY = st.secrets['MON_KEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
         
 def get_logpath():
