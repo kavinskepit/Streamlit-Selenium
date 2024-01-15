@@ -30,23 +30,19 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import tempfile
-#import chromedriver_autoinstaller
 
-#chromedriver_autoinstaller.install()
-
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-#os.environ.get('DATABASE_URL')
-#MON_KEY = st.secrets['MON_KEY']
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY'] 
+MON_KEY = st.secrets['MON_KEY']
 # write all the functions here and include @st.cache_resource(show_spinner=False) before def line
-@st.cache_resource(show_spinner=False)        
+        
 def get_logpath():
     return os.path.join(os.getcwd(), 'selenium.log')
 
-@st.cache_resource(show_spinner=False)
+
 def get_chromedriver_path():
     return shutil.which('chromedriver')
 
-@st.cache_resource(show_spinner=False)
+
 def get_webdriver_options():
     options = Options()
     options.add_argument("--headless")
@@ -66,8 +62,6 @@ def get_webdriver_service(logpath):
     )
     return service
 
-
-
 def delete_selenium_log(logpath):
     if os.path.exists(logpath):
         os.remove(logpath)
@@ -80,27 +74,9 @@ def show_selenium_log(logpath):
     else:
         st.warning('No log file found!')
 
-def run_selenium(logpath):
-    chrome_options = webdriver.ChromeOptions()
-    #chrome_options.add_argument('--headless')  # Adjust based on your needs
-    #chrome_options.add_argument('--disable-gpu')
-    chrome_options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
-    # If running on a headless server, you might need to use the following options:
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--disable-features=NetworkService")
-    chrome_options.add_argument("--window-size=1920x1080")
-    chrome_options.add_argument("--disable-features=VizDisplayCompositor")
-    
-    #driver_path = chromedriver_autoinstaller.install(cwd=True)
 
-    browsers=webdriver.Chrome(options=chrome_options)
-    browsers=webdriver.Chrome(executable_path=os.environ.get("GOOGLE_CHROME_BIN"), options=chrome_options)
-    #browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
+def run_selenium(logpath):
+    browsers=webdriver.Chrome(options=get_webdriver_options(), service=get_webdriver_service(logpath=logpath))
         
         
     return browsers
@@ -134,26 +110,26 @@ def content_generator(restuarant_name, location, nature_of_cuisine, occasion, of
 
 @st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
 def image_generator(other_keywords):
-    #max_wait_time=300
-    #api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMyYTZhMmFkZDhlMWIyODdjODI1NGM4MmU0OTVjM2UzIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDEtMDRUMDY6MTg6NTQuNjMxODM4In0.LYY0PAaj4F0dj25V2elQaErz8u7pZJITnhL9qAc2lx8'  # Your API key here
+    max_wait_time=300
+    api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMyYTZhMmFkZDhlMWIyODdjODI1NGM4MmU0OTVjM2UzIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDEtMDRUMDY6MTg6NTQuNjMxODM4In0.LYY0PAaj4F0dj25V2elQaErz8u7pZJITnhL9qAc2lx8'  # Your API key here
     
-    #monster_client = client(api_key)
-    #model = 'sdxl-base'
-    #input_data = {
-    #    'prompt': other_keywords,
-    #    'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
-    #    'samples': 2,
-    #    'steps': 50,
-    #    'aspect_ratio': 'square',
-    #    'guidance_scale': 7.5,
-    #    'seed': 2414,
-    #    }
-    #result = monster_client.generate(model, input_data)
+    monster_client = client(api_key)
+    model = 'sdxl-base'
+    input_data = {
+        'prompt': other_keywords,
+        'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly, text, letters, numbers, humans',
+        'samples': 2,
+        'steps': 50,
+        'aspect_ratio': 'square',
+        'guidance_scale': 7.5,
+        'seed': 2414,
+        }
+    result = monster_client.generate(model, input_data)
     
     
 
-    #image_urls = result['output']
-    image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
+    image_urls = result['output']
+    #image_urls = ["https://www.simplilearn.com/ice9/free_resources_article_thumb/Coca_Cola_Marketing_Strategy_2022.jpg"]
     return image_urls
 
 
@@ -165,7 +141,7 @@ def save_uploaded_file(uploaded_file):
         f.write(uploaded_file.getvalue())
     return file_path
 
-@st.cache_resource(show_spinner=False, experimental_allow_widgets=True)
+
 #function that displays content and defines the UI (Main)
 def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords):
     global browsers
@@ -180,7 +156,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
     image_urls= image_generator(other_keywords)
 
 
-    # Display all images with buttons
+    # Display all images with buttons 
     for i, image_url in enumerate(image_urls):
         st.image(image_url, caption=f'Image {i + 1}', use_column_width=True, width=200)
     selected_image_index = st.text_input("Enter the image you want to choose (e.g., 1)",key="selected image")
@@ -209,6 +185,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                         #login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasion,offer,other_keywords)
                         page_id,permanant_access_token = app_creation(username, password, App_name)
                                 #image_path = 'image.jpeg'
+                        browsers.quit()
                         access_token = permanant_access_token  # Your Facebook access token here
                                 #page_id = '179897971873271'  # Your Facebook page ID here
                         message = str(modified_content)
@@ -229,14 +206,9 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                             image_path = image_response.content
                             
                             caption = modified_content
-                        
-                            
-                            
-
                             # Replace with your User Access Token, Page ID, and desired API version
                             user_access_token = permanant_access_token
                             
-
                             api_version = "v13.0"
 
                             # Make a request to get the Page Access Token
@@ -270,6 +242,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                                         #image_path = save_uploaded_file(uploaded_file)
                                         post_to_facebook_demo_schedule_image_url(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
                                         st.success("Post scheduled successfully!")
+                                        st.cache_resource.clear()
                                     except Exception as e:
                                         st.error(f"Error scheduling post: {e}")
                                 else:
@@ -277,9 +250,11 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                         if st.checkbox("Post Now"):
                             post_to_facebook_demo(access_token, page_id, message, image_path)
                             st.success("Post published successfully.")
-                        # Button to close the browser
-                            if st.button("Close Browser"):
-                                close_browser()
+                            st.cache_resource.clear()
+                        # Button to close the browsers
+                            if st.button("Close browsers"):
+                                st.cache_resource.clear()
+                                close_browsers()
                     else:
                         st.warning("Please enter both Facebook username and password.")
             else:
@@ -361,6 +336,7 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                                     image_path = save_uploaded_file(uploaded_file)
                                     post_to_facebook_demo_schedule_file_upload(access_token, page_id, message, image_path, scheduled_datetime, selected_timezone)
                                     st.success("Post scheduled successfully!")
+                                    st.cache_resource.clear()
                                 except Exception as e:
                                     st.error(f"Error scheduling post: {e}")
                             else:
@@ -375,13 +351,17 @@ def login_to_facebook(App_name,restuarant_name,location,nature_of_cuisine,occasi
                     if st.checkbox("Post Now"):
                         post_to_facebook_demo_file_upload(access_token, page_id, message, image_path)
                         st.success("Post published successfully.")
-                    # Button to close the browser
-                        if st.button("Close Browser"):
-                            close_browser()
+                        st.cache_resource.clear()
+                    # Button to close the browsers
+                        if st.button("Close browsers"):
+                            st.cache_resource.clear()
+                            close_browsers()
                 else:
                     st.warning("Please enter both Facebook username and password.")
                     
     return browsers, selected_profile
+
+
 
 
 
@@ -811,7 +791,6 @@ def app_creation(username, password, App_name):
          
             pageid = page_id
             access_token = permanant_access_token
-            browsers.quit()
         
         
     
@@ -1074,7 +1053,7 @@ schedule_thread.start()
 
 
 if __name__ == "__main__":
-    st.cache_resource.clear()    
+    st.cache_resource.clear()
     logpath=get_logpath()
     delete_selenium_log(logpath=logpath)
     browsers=run_selenium(logpath=logpath)
@@ -1149,4 +1128,3 @@ if __name__ == "__main__":
             st.cache_resource.clear()
             #st.experimental_rerun()
         
-
